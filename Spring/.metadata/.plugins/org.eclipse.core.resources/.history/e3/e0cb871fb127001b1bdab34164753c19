@@ -1,0 +1,25 @@
+package com.example.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.domain.TradeVO;
+import com.example.mapper.TradeMapper;
+
+@Service
+public class TradeService {
+	@Autowired
+	TradeMapper mapper;
+	
+	public void insert(TradeVO vo){
+		//출금
+		String ano = vo.getAno();
+		String TradeNo = vo.getTradeNo();
+		vo.setType("출금");
+		mapper.insert(vo);
+		
+		//입금
+		vo.setAno(TradeNo);
+		vo.setTradeNo(ano);
+	}
+}
